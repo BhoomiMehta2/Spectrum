@@ -247,27 +247,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1200);
     });
 
-    // Gatekeeper Tab Control
-    const gkTabBtns = document.querySelectorAll(".gk-tab-btn");
-    const gkPanes = document.querySelectorAll(".gk-pane");
-
-    gkTabBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            gkTabBtns.forEach(b => b.classList.remove("active"));
-            gkPanes.forEach(p => p.classList.remove("active"));
-
-            btn.classList.add("active");
-            const tabId = btn.getAttribute("data-tab");
-            const targetPane = document.getElementById(`gk-${tabId}`);
-            if (targetPane) {
-                targetPane.classList.add("active");
-            }
-        });
-    });
-
-    // Copy Command Button
-    const copyCmdBtn = document.getElementById("copy-cmd-btn");
-    const cmdToCopy = document.getElementById("cmd-to-copy");
+    // Copy Install Command Button
+    const copyInstallBtn = document.getElementById("copy-install-btn");
+    const installCmd = document.getElementById("install-cmd");
 
     function copyTextToClipboard(text) {
         if (navigator.clipboard && window.isSecureContext) {
@@ -298,24 +280,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    if (copyCmdBtn && cmdToCopy) {
-        copyCmdBtn.addEventListener("click", () => {
-            const commandText = cmdToCopy.textContent.trim();
+    if (copyInstallBtn && installCmd) {
+        copyInstallBtn.addEventListener("click", () => {
+            const commandText = installCmd.textContent.trim();
+            const copyTextSpan = copyInstallBtn.querySelector(".copy-text");
+            const copyIconSpan = copyInstallBtn.querySelector(".copy-icon");
+
             copyTextToClipboard(commandText).then(() => {
-                copyCmdBtn.textContent = "Command Copied! ✓";
-                copyCmdBtn.classList.add("copied");
+                if (copyTextSpan) copyTextSpan.textContent = "Copied!";
+                if (copyIconSpan) copyIconSpan.textContent = "✓";
+                copyInstallBtn.classList.add("copied");
 
                 setTimeout(() => {
-                    copyCmdBtn.textContent = "Copy Command";
-                    copyCmdBtn.classList.remove("copied");
+                    if (copyTextSpan) copyTextSpan.textContent = "Copy";
+                    if (copyIconSpan) copyIconSpan.textContent = "📋";
+                    copyInstallBtn.classList.remove("copied");
                 }, 2500);
             }).catch(err => {
                 console.error("Failed to copy command:", err);
-                copyCmdBtn.textContent = "Command Copied! ✓";
-                copyCmdBtn.classList.add("copied");
+                if (copyTextSpan) copyTextSpan.textContent = "Copied!";
+                if (copyIconSpan) copyIconSpan.textContent = "✓";
+                copyInstallBtn.classList.add("copied");
                 setTimeout(() => {
-                    copyCmdBtn.textContent = "Copy Command";
-                    copyCmdBtn.classList.remove("copied");
+                    if (copyTextSpan) copyTextSpan.textContent = "Copy";
+                    if (copyIconSpan) copyIconSpan.textContent = "📋";
+                    copyInstallBtn.classList.remove("copied");
                 }, 2500);
             });
         });

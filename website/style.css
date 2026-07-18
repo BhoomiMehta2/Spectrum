@@ -728,294 +728,176 @@ body {
     line-height: 1.6;
 }
 
-/* Gatekeeper Section */
-.gatekeeper-section {
-    padding: 100px 0;
-    background: rgba(157, 78, 221, 0.01);
-    border-top: 1px solid var(--border-color);
+/* Download Section - Interactive Terminal */
+.download-section {
+    padding: 120px 0;
+    background-color: var(--bg-color);
+    position: relative;
+    overflow: hidden;
 }
 
-.gatekeeper-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 40px;
+.download-header-content {
+    text-align: center;
+    margin-bottom: 50px;
 }
 
-.gk-tab-btn {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+.download-header-content h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.download-header-content p {
     color: var(--text-secondary);
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.gk-tab-btn:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.gk-tab-btn.active {
-    background: var(--glass-bg);
-    border-color: var(--accent-purple);
-    color: var(--text-primary);
-    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.15);
-}
-
-.gatekeeper-content {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    max-width: 900px;
+    font-size: 18px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
-.gk-pane {
-    display: none;
-}
-
-.gk-pane.active {
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
-}
-
-.gk-pane h3 {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-.gk-pane p {
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    font-size: 15px;
-}
-
-.gk-pane ol {
-    margin-left: 20px;
-    margin-bottom: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.gk-pane li {
-    font-size: 15px;
-    color: var(--text-secondary);
-}
-
-.gk-pane li strong {
-    color: var(--text-primary);
-}
-
-.gk-highlight {
-    background: rgba(157, 78, 221, 0.1);
-    border-left: 4px solid var(--accent-purple);
-    padding: 16px 20px;
-    border-radius: 0 8px 8px 0;
-    font-size: 14px !important;
-    color: #e0aaff !important;
-}
-
-.gk-pane-layout {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 40px;
-    align-items: center;
-}
-
-/* Mouse Graphic */
-.gk-illustration {
+.terminal-download-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-bottom: 40px;
 }
 
-.mouse-graphic {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-}
-
-.mouse-body {
-    width: 60px;
-    height: 100px;
-    border: 3px solid var(--text-secondary);
-    border-radius: 30px;
+.web-terminal-window {
+    width: 100%;
+    max-width: 700px;
+    background: rgba(15, 17, 26, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(157, 78, 221, 0.1);
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
     position: relative;
 }
 
-.mouse-wheel {
-    width: 4px;
-    height: 16px;
-    background-color: var(--text-secondary);
+.web-terminal-window::before {
+    content: '';
     position: absolute;
-    top: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-.mouse-click-highlight.right {
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    width: 25px;
-    height: 40px;
-    background: var(--accent-purple-glow);
-    border-top-right-radius: 25px;
-    border-bottom-left-radius: 4px;
-    animation: pulseGlow 1.5s infinite;
-}
-
-.mouse-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-
-/* Terminal Graphic */
-.terminal-mock {
-    background: #090b10;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    overflow: hidden;
-    font-family: 'Fira Code', monospace;
-    font-size: 13px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    margin-bottom: 20px;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 }
 
 .term-header {
-    background: #14161f;
-    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 14px 20px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.term-controls {
+    display: flex;
+    gap: 8px;
 }
 
 .term-dot {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15);
 }
 
+.term-dot.red { background-color: #ff5f56; }
+.term-dot.yellow { background-color: #ffbd2e; }
+.term-dot.green { background-color: #27c93f; }
+
 .term-title {
-    margin-left: 8px;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.4);
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    margin-right: 56px; /* Offset to center title visually */
+}
+
+.term-body {
+    padding: 30px 24px;
 }
 
 .command-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
-}
-
-.copy-cmd-btn {
-    flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 8px;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    font-family: 'Inter', sans-serif;
-}
-
-.copy-cmd-btn:hover {
-    background: var(--accent-purple);
-    color: #ffffff;
-    border-color: var(--accent-purple-glow);
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-}
-
-.copy-cmd-btn.copied {
-    background: #10b981 !important;
-    color: #ffffff !important;
-    border-color: #10b981 !important;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-.term-body {
+    background: rgba(0, 0, 0, 0.3);
     padding: 16px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .term-prompt {
     color: #a6da95;
+    font-weight: bold;
+    user-select: none;
 }
 
 .term-cmd {
-    color: var(--text-primary);
+    flex: 1;
+    color: #e4e4e7;
+    word-break: break-all;
+    line-height: 1.5;
 }
 
-.gk-note {
-    font-size: 12px !important;
-}
-
-/* Download Section */
-.download-section {
-    padding: 120px 0;
-    background-color: var(--bg-color);
-}
-
-.download-card {
-    background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(157, 78, 221, 0.06) 100%);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 60px 40px;
-    text-align: center;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.download-card h2 {
-    font-family: 'Outfit', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.download-card p {
-    color: var(--text-secondary);
-    font-size: 16px;
-    max-width: 500px;
-}
-
-.download-buttons {
-    margin: 16px 0;
-}
-
-.download-meta {
-    font-size: 13px;
-    color: var(--text-secondary);
+.copy-install-btn {
     display: flex;
     align-items: center;
     gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.copy-install-btn:hover {
+    background: var(--accent-purple);
+    border-color: var(--accent-purple-glow);
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.copy-install-btn.copied {
+    background: #10b981;
+    border-color: #10b981;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.term-output {
+    margin-top: 24px;
+    padding-left: 20px;
+}
+
+.dim-text {
+    color: rgba(255, 255, 255, 0.3);
+    font-style: italic;
+}
+
+.download-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
 .download-meta .divider {
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 /* Footer */

@@ -206,97 +206,43 @@
         </div>
     </section>
 
-    <!-- Gatekeeper Section -->
-    <section id="gatekeeper" class="gatekeeper-section">
-        <div class="container">
-            <h2 class="section-title">Bypass the macOS Gatekeeper Warning 🛡️</h2>
-            <p class="section-subtitle">Since Spectrum is open-source and distributed directly without paying Apple's $99/year license, macOS will show a security check. Follow these easy steps to open it:</p>
-
-            <div class="gatekeeper-tabs">
-                <button class="gk-tab-btn active" data-tab="right-click">💡 Method 1: Right-Click</button>
-                <button class="gk-tab-btn" data-tab="settings">⚙️ Method 2: System Settings</button>
-                <button class="gk-tab-btn" data-tab="terminal">💻 Method 3: Terminal Command (Recommended)</button>
-            </div>
-
-            <div class="gatekeeper-content">
-                <div id="gk-right-click" class="gk-pane active">
-                    <div class="gk-pane-layout">
-                        <div class="gk-text">
-                            <h3>The 3-Second Right-Click Shortcut</h3>
-                            <p>This is the standard workaround for opening trusted open-source applications on macOS:</p>
-                            <ol>
-                                <li>Open <strong>Finder</strong> and locate <strong>Spectrum.app</strong> in your <code>/Applications</code> directory.</li>
-                                <li><strong>Right-click</strong> (or hold the <code>Control</code> key and click) the app icon.</li>
-                                <li>Select <strong>Open</strong> from the context menu.</li>
-                                <li>A dialog box will appear. Click the <strong>Open</strong> button (instead of Cancel).</li>
-                            </ol>
-                            <p class="gk-highlight">Mac will remember this choice, and the app will open normally with a double-click going forward.</p>
-                        </div>
-                        <div class="gk-illustration">
-                            <div class="mouse-graphic">
-                                <div class="mouse-body">
-                                    <div class="mouse-wheel"></div>
-                                    <div class="mouse-click-highlight right"></div>
-                                </div>
-                                <span class="mouse-label">Right-Click + Open</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="gk-settings" class="gk-pane">
-                    <h3>Using macOS Security Settings</h3>
-                    <p>If you prefer using the system interface to override the block, do the following:</p>
-                    <ol>
-                        <li>Double-click the app to trigger the block warning, then click <strong>Cancel</strong> or <strong>OK</strong>.</li>
-                        <li>Open your Mac's <strong>System Settings</strong> and click <strong>Privacy & Security</strong> in the sidebar.</li>
-                        <li>Scroll down to the <strong>Security</strong> header.</li>
-                        <li>You will see a note saying: <em>"Spectrum was blocked from use because it is not from an identified developer."</em></li>
-                        <li>Click the <strong>Open Anyway</strong> button and verify with your password.</li>
-                    </ol>
-                </div>
-
-                <div id="gk-terminal" class="gk-pane">
-                    <h3>Clear the Quarantine Attribute via Terminal</h3>
-                    <p>For power users, macOS marks browser-downloaded apps with a "quarantine" tag. You can instantly strip it using a single command:</p>
-                    <div class="terminal-mock">
-                        <div class="term-header">
-                            <span class="term-dot"></span>
-                            <span class="term-dot"></span>
-                            <span class="term-dot"></span>
-                            <span class="term-title">zsh</span>
-                        </div>
-                        <div class="term-body">
-                            <div class="command-row">
-                                <code id="cmd-to-copy" class="term-cmd">xattr -d com.apple.quarantine /Applications/Spectrum.app</code>
-                                <button id="copy-cmd-btn" class="copy-cmd-btn">Copy Command</button>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="gk-note">Note: You may need to replace the path if you saved the app bundle elsewhere than your `/Applications` directory.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Download Section -->
     <section id="download" class="download-section">
         <div class="container">
-            <div class="download-card">
-                <h2>Ready to elevate your Xcode editor?</h2>
-                <p>Download the latest universal build containing native execution support for Intel and Apple Silicon Macs.</p>
-                
-                <div class="download-buttons">
-                    <a href="Spectrum.dmg" download class="btn btn-primary btn-large">
-                        <span class="btn-subtext">Download (.dmg)</span>
-                        <span class="btn-maintext">Spectrum for macOS</span>
-                    </a>
+            <div class="download-header-content">
+                <h2 class="section-title">Ready to elevate your Xcode editor?</h2>
+                <p class="section-subtitle">You will need your terminal to open the app. Copy and paste the command below.</p>
+            </div>
+            
+            <div class="terminal-download-container">
+                <div class="web-terminal-window">
+                    <div class="term-header">
+                        <div class="term-controls">
+                            <span class="term-dot red"></span>
+                            <span class="term-dot yellow"></span>
+                            <span class="term-dot green"></span>
+                        </div>
+                        <span class="term-title">bash — Spectrum Installer</span>
+                    </div>
+                    <div class="term-body">
+                        <div class="command-row">
+                            <span class="term-prompt">$</span>
+                            <code id="install-cmd" class="term-cmd">curl -sL https://bhoomimehta2.github.io/Spectrum/install.sh | bash</code>
+                            <button id="copy-install-btn" class="copy-install-btn">
+                                <span class="copy-icon">📋</span> <span class="copy-text">Copy</span>
+                            </button>
+                        </div>
+                        <div class="term-output">
+                            <span class="dim-text"># Press Enter in your terminal to begin installation...</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="download-meta">
-                    <span>Supports macOS Ventura, Sonoma, and Sequoia</span>
-                    <span class="divider">•</span>
-                    <span>100% Free & Open-Source</span>
-                </div>
+            </div>
+            
+            <div class="download-meta">
+                <span>Supports macOS Ventura, Sonoma, and Sequoia</span>
+                <span class="divider">•</span>
+                <span>100% Free & Open-Source</span>
             </div>
         </div>
     </section>
