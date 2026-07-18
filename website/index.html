@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectrum — VS Code to Xcode Theme Converter</title>
+    <meta name="description" content="A premium native macOS utility to search, import, and convert VS Code themes to Xcode with 1 click.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glows -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="AppIcon.png" alt="Spectrum App Icon" class="logo-img" id="nav-logo">
+                <span class="logo-text">Spectrum</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#simulator">Interactive Demo</a>
+                <a href="#gatekeeper">Security Guide</a>
+                <a href="#download" class="btn btn-secondary nav-btn">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="badge-container">
+                    <span class="badge">🎨 Version 1.0 Available</span>
+                </div>
+                <h1 class="hero-title">Your favorite themes,<br><span class="gradient-text">now in Xcode.</span></h1>
+                <p class="hero-subtitle">
+                    Spectrum is a lightning-fast, native macOS app that imports any VS Code theme from your disk or the extensions gallery, converts it, and applies it to Xcode in one click.
+                </p>
+                <div class="hero-actions">
+                    <a href="#download" class="btn btn-primary">
+                        <span>Download for macOS</span>
+                    </a>
+                    <a href="https://github.com/BhoomiMehta2/Spectrum" target="_blank" class="btn btn-tertiary">
+                        <svg class="github-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+                <div class="hero-disclaimer">
+                    <span class="warning-icon">⚠️</span> Unsigned developer warning? <a href="#gatekeeper">See our simple 5-second bypass</a>.
+                </div>
+            </div>
+
+            <!-- App Mockup Image/Graphic -->
+            <div class="hero-mockup-container">
+                <div class="mockup-frame">
+                    <div class="mockup-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="mockup-title">Spectrum — VS Code Theme Converter</span>
+                    </div>
+                    <div class="mockup-content">
+                        <!-- Sidebar Mockup -->
+                        <div class="sidebar-mock">
+                            <div class="sidebar-header">IMPORTED THEMES</div>
+                            <div class="sidebar-item active">Sakura.json</div>
+                            <div class="sidebar-item">Dracula.json</div>
+                            <div class="sidebar-item">Tokyo Night.json</div>
+                            <div class="sidebar-item">Catppuccin.json</div>
+                            <div class="sidebar-footer">+ Import File</div>
+                        </div>
+                        <!-- Main Content Mockup -->
+                        <div class="main-mock">
+                            <div class="main-header">
+                                <span class="theme-name">Sakura Theme</span>
+                                <button class="mock-btn-install">Install to Xcode</button>
+                            </div>
+                            <div class="editor-pane">
+                                <pre><code><span class="kw">class</span> <span class="typ">Developer</span> {
+    <span class="kw">let</span> <span class="var">name</span> = <span class="str">"Bhoomi"</span>
+    <span class="kw">let</span> <span class="var">role</span> = <span class="str">"Creator"</span>
+    
+    <span class="kw">func</span> <span class="func">code</span>() {
+        <span class="comment">// Converts VS Code into Xcode theme</span>
+        <span class="func">print</span>(<span class="str">"Converting Sakura theme..."</span>)
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="simulator" class="simulator-section">
+        <div class="container">
+            <h2 class="section-title">See the Conversion Magic</h2>
+            <p class="section-subtitle">Choose a popular theme below to simulate how Spectrum translates VS Code theme properties into native Xcode settings instantly.</p>
+            
+            <div class="theme-selector-tabs">
+                <button class="tab-btn active" data-theme="sakura">🌸 Sakura</button>
+                <button class="tab-btn" data-theme="dracula">🧛 Dracula</button>
+                <button class="tab-btn" data-theme="tokyonight">🌃 Tokyo Night</button>
+                <button class="tab-btn" data-theme="catppuccin">🐱 Catppuccin</button>
+            </div>
+
+            <div class="simulator-container">
+                <!-- Left: VS Code JSON -->
+                <div class="sim-panel code-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">VS Code Theme Format (JSON)</span>
+                        <span class="file-badge">vscode-theme.json</span>
+                    </div>
+                    <div class="panel-body">
+                        <pre><code id="json-code-block" class="fira-font">... loading theme ...</code></pre>
+                    </div>
+                </div>
+
+                <!-- Middle Conversion Arrow -->
+                <div class="sim-divider">
+                    <div class="arrow-container">
+                        <span class="pulse-line"></span>
+                        <div class="arrow-circle">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </div>
+                        <span class="convert-label">Spectrum</span>
+                    </div>
+                </div>
+
+                <!-- Right: Xcode Editor Preview -->
+                <div class="sim-panel xcode-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Xcode Live Preview Mockup</span>
+                        <span class="file-badge">Preview.swift</span>
+                    </div>
+                    <div class="panel-body" id="xcode-preview-pane">
+                        <div class="xcode-editor-header">
+                            <span class="editor-dot red"></span>
+                            <span class="editor-dot yellow"></span>
+                            <span class="editor-dot green"></span>
+                            <span class="editor-filename">Spectrum.swift</span>
+                        </div>
+                        <div class="xcode-editor-content">
+                            <div class="line-numbers">
+                                <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                            </div>
+                            <pre><code class="fira-font"><span class="xc-kw">import</span> Foundation
+
+<span class="xc-comment">/// A simple demo of Xcode conversion</span>
+<span class="xc-kw">class</span> <span class="xc-type">ThemeStudio</span> {
+    <span class="xc-kw">let</span> <span class="xc-var">themeName</span> = <span class="xc-str">"Sakura"</span>
+    <span class="xc-kw">var</span> <span class="xc-var">isActive</span> = <span class="xc-bool">true</span>
+    
+    <span class="xc-kw">func</span> <span class="xc-func">applyTheme</span>() {
+        <span class="xc-func">print</span>(<span class="xc-str">"Theme converted successfully!"</span>)
+    }
+}</code></pre>
+                        </div>
+                        <div class="install-action-wrapper">
+                            <button id="sim-install-btn" class="btn btn-primary">Simulate Install</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Tailored for Apple Ecosystem Developers</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Marketplace Search</h3>
+                    <p>Search, query, and download theme extensions directly from the official VS Code gallery in real time without leaving the app.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Immediate Integration</h3>
+                    <p>Updating theme configurations writes in the background to Apple global preferences. Your newly converted themes appear instantly upon Xcode launch.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Zero Third-Party Bloat</h3>
+                    <p>Designed natively in pure SwiftUI using macOS commands (`defaults` and `unzip`) to guarantee extreme performance and light resource footprint.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>Clean Library Sandbox</h3>
+                    <p>Organize, save, and manage your theme collections cleanly. All imports are saved locally into your User Library folder under your full control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gatekeeper Section -->
+    <section id="gatekeeper" class="gatekeeper-section">
+        <div class="container">
+            <h2 class="section-title">Bypass the macOS Gatekeeper Warning 🛡️</h2>
+            <p class="section-subtitle">Since Spectrum is open-source and distributed directly without paying Apple's $99/year license, macOS will show a security check. Follow these easy steps to open it:</p>
+
+            <div class="gatekeeper-tabs">
+                <button class="gk-tab-btn active" data-tab="right-click">💡 Method 1: Right-Click</button>
+                <button class="gk-tab-btn" data-tab="settings">⚙️ Method 2: System Settings</button>
+                <button class="gk-tab-btn" data-tab="terminal">💻 Method 3: Terminal Command</button>
+            </div>
+
+            <div class="gatekeeper-content">
+                <div id="gk-right-click" class="gk-pane active">
+                    <div class="gk-pane-layout">
+                        <div class="gk-text">
+                            <h3>The 3-Second Right-Click Shortcut</h3>
+                            <p>This is the standard workaround for opening trusted open-source applications on macOS:</p>
+                            <ol>
+                                <li>Open <strong>Finder</strong> and locate <strong>Spectrum.app</strong> in your <code>/Applications</code> directory.</li>
+                                <li><strong>Right-click</strong> (or hold the <code>Control</code> key and click) the app icon.</li>
+                                <li>Select <strong>Open</strong> from the context menu.</li>
+                                <li>A dialog box will appear. Click the <strong>Open</strong> button (instead of Cancel).</li>
+                            </ol>
+                            <p class="gk-highlight">Mac will remember this choice, and the app will open normally with a double-click going forward.</p>
+                        </div>
+                        <div class="gk-illustration">
+                            <div class="mouse-graphic">
+                                <div class="mouse-body">
+                                    <div class="mouse-wheel"></div>
+                                    <div class="mouse-click-highlight right"></div>
+                                </div>
+                                <span class="mouse-label">Right-Click + Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="gk-settings" class="gk-pane">
+                    <h3>Using macOS Security Settings</h3>
+                    <p>If you prefer using the system interface to override the block, do the following:</p>
+                    <ol>
+                        <li>Double-click the app to trigger the block warning, then click <strong>Cancel</strong> or <strong>OK</strong>.</li>
+                        <li>Open your Mac's <strong>System Settings</strong> and click <strong>Privacy & Security</strong> in the sidebar.</li>
+                        <li>Scroll down to the <strong>Security</strong> header.</li>
+                        <li>You will see a note saying: <em>"Spectrum was blocked from use because it is not from an identified developer."</em></li>
+                        <li>Click the <strong>Open Anyway</strong> button and verify with your password.</li>
+                    </ol>
+                </div>
+
+                <div id="gk-terminal" class="gk-pane">
+                    <h3>Clear the Quarantine Attribute via Terminal</h3>
+                    <p>For power users, macOS marks browser-downloaded apps with a "quarantine" tag. You can instantly strip it using a single command:</p>
+                    <div class="terminal-mock">
+                        <div class="term-header">
+                            <span class="term-dot"></span>
+                            <span class="term-dot"></span>
+                            <span class="term-dot"></span>
+                            <span class="term-title">zsh</span>
+                        </div>
+                        <div class="term-body">
+                            <p class="term-prompt">bhoomimehta@MacBook ~ % <span class="term-cmd">xattr -d com.apple.quarantine /Applications/Spectrum.app</span></p>
+                        </div>
+                    </div>
+                    <p class="gk-note">Note: You may need to replace the path if you saved the app bundle elsewhere than your `/Applications` directory.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="download-card">
+                <h2>Ready to elevate your Xcode editor?</h2>
+                <p>Download the latest universal build containing native execution support for Intel and Apple Silicon Macs.</p>
+                
+                <div class="download-buttons">
+                    <a href="Spectrum.dmg" download class="btn btn-primary btn-large">
+                        <span class="btn-subtext">Download (.dmg)</span>
+                        <span class="btn-maintext">Spectrum for macOS</span>
+                    </a>
+                </div>
+                <div class="download-meta">
+                    <span>Supports macOS Ventura, Sonoma, and Sequoia</span>
+                    <span class="divider">•</span>
+                    <span>100% Free & Open-Source</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">Spectrum</span>
+                <p>Beautiful theme portability tools built by and for developers.</p>
+            </div>
+            <div class="footer-credits">
+                <p>Crafted for Bhoomi Mehta's Xcode Theme Studio project.</p>
+                <p class="mit-license">Licensed under MIT. Open-source and free.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

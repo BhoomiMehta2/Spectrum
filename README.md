@@ -40,6 +40,31 @@ killall Finder && killall Dock
 
 ---
 
+## macOS Security Warning (Gatekeeper) 🛡️
+
+Since **Spectrum** is an open-source tool and not signed with a paid Apple Developer account ($99/year), macOS will show a warning saying it **"cannot be opened because the developer cannot be verified"** or **"cannot check it for malicious software"** when run for the first time.
+
+This is standard macOS security behavior for independent developer tools. You can easily bypass it using one of these methods:
+
+### Method 1: The Right-Click Trick (Recommended)
+1. Open **Finder** and navigate to your `/Applications` folder.
+2. **Right-click** (or `Control` + click) the `Spectrum.app` icon and select **Open**.
+3. A popup will appear. Click the **Open** button (instead of Cancel or Move to Trash). macOS will remember this, and the app will open normally from now on.
+
+### Method 2: System Privacy Settings
+1. Double-click the app, get the warning popup, and click **Cancel** or **OK**.
+2. Open your Mac's **System Settings** and go to **Privacy & Security**.
+3. Scroll down to the **Security** section. You will see a message: *"Spectrum was blocked from use because it is not from an identified developer."*
+4. Click **Open Anyway** and enter your Mac password.
+
+### Method 3: Clean via Terminal (For Power Users)
+If you downloaded a zip or dmg, you can remove the macOS "quarantine" flag from the app bundle using terminal:
+```bash
+xattr -d com.apple.quarantine /Applications/Spectrum.app
+```
+
+---
+
 ## Usage Guide 📖
 
 1. **Import a Theme**: 
