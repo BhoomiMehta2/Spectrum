@@ -19,7 +19,6 @@ public struct SidebarView: View {
                         }
                 }
             }
-            .collapsible(false)
             
             if !viewModel.importedThemes.isEmpty {
                 Section(header: Text("Imported").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)) {
@@ -30,7 +29,6 @@ public struct SidebarView: View {
                             }
                     }
                 }
-                .collapsible(false)
             }
             
             if !viewModel.addedToXcodeThemes.isEmpty {
@@ -42,7 +40,6 @@ public struct SidebarView: View {
                             }
                     }
                 }
-                .collapsible(false)
             }
         }
         .listStyle(.sidebar)
