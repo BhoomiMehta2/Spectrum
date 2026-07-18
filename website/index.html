@@ -70,19 +70,20 @@
                     </div>
                     <div class="mockup-content">
                         <!-- Sidebar Mockup -->
-                        <div class="sidebar-mock">
+                        <div class="sidebar-mock" id="hero-sidebar">
                             <div class="sidebar-header">IMPORTED THEMES</div>
-                            <div class="sidebar-item active">Sakura.json</div>
-                            <div class="sidebar-item">Dracula.json</div>
-                            <div class="sidebar-item">Tokyo Night.json</div>
-                            <div class="sidebar-item">Catppuccin.json</div>
+                            <div class="sidebar-item active" data-theme="Sakura">Sakura.json</div>
+                            <div class="sidebar-item" data-theme="Dracula">Dracula.json</div>
+                            <div class="sidebar-item" data-theme="Tokyo Night">Tokyo Night.json</div>
+                            <div class="sidebar-item" data-theme="Catppuccin">Catppuccin.json</div>
+                            <div class="sidebar-header added-header" style="margin-top: 12px; display: none;">ADDED TO XCODE</div>
                             <div class="sidebar-footer">+ Import File</div>
                         </div>
                         <!-- Main Content Mockup -->
                         <div class="main-mock">
                             <div class="main-header">
-                                <span class="theme-name">Sakura Theme</span>
-                                <button class="mock-btn-install">Install to Xcode</button>
+                                <span class="theme-name" id="hero-theme-name">Sakura Theme</span>
+                                <button id="hero-action-btn" class="mock-btn-install">Add to Xcode</button>
                             </div>
                             <div class="editor-pane">
                                 <pre><code><span class="kw">class</span> <span class="typ">Developer</span> {
@@ -214,7 +215,7 @@
             <div class="gatekeeper-tabs">
                 <button class="gk-tab-btn active" data-tab="right-click">💡 Method 1: Right-Click</button>
                 <button class="gk-tab-btn" data-tab="settings">⚙️ Method 2: System Settings</button>
-                <button class="gk-tab-btn" data-tab="terminal">💻 Method 3: Terminal Command</button>
+                <button class="gk-tab-btn" data-tab="terminal">💻 Method 3: Terminal Command (Recommended)</button>
             </div>
 
             <div class="gatekeeper-content">

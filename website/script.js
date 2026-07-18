@@ -320,4 +320,81 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    // Hero Mockup Interactivity
+    const heroSidebar = document.getElementById("hero-sidebar");
+    if (heroSidebar) {
+        const heroThemeName = document.getElementById("hero-theme-name");
+        const heroActionBtn = document.getElementById("hero-action-btn");
+        const addedHeader = heroSidebar.querySelector(".added-header");
+        const sidebarFooter = heroSidebar.querySelector(".sidebar-footer");
+
+        let currentTheme = "Sakura";
+        let addedThemes = new Set();
+
+        function updateHeroView(themeName) {
+            currentTheme = themeName;
+            heroThemeName.textContent = themeName + " Theme";
+            
+            // Update active state in sidebar
+            heroSidebar.querySelectorAll(".sidebar-item").forEach(item => {
+                if (item.getAttribute("data-theme") === themeName) {
+                    item.classList.add("active");
+                } else {
+                    item.classList.remove("active");
+                }
+            });
+
+            // Update button state
+            if (addedThemes.has(themeName)) {
+                heroActionBtn.textContent = "Apply to Xcode";
+                heroActionBtn.style.background = "linear-gradient(135deg, #4ade80 0%, #10b981 100%)";
+            } else {
+                heroActionBtn.textContent = "Add to Xcode";
+                heroActionBtn.style.background = ""; // revert to default CSS
+            }
+        }
+
+        // Handle sidebar clicks
+        heroSidebar.addEventListener("click", (e) => {
+            const item = e.target.closest(".sidebar-item");
+            if (item) {
+                const themeName = item.getAttribute("data-theme");
+                updateHeroView(themeName);
+            }
+        });
+
+        // Handle button click
+        if (heroActionBtn) {
+            heroActionBtn.addEventListener("click", () => {
+                if (!addedThemes.has(currentTheme)) {
+                    // Add to Xcode
+                    addedThemes.add(currentTheme);
+                    
+                    // Show added header if hidden
+                    addedHeader.style.display = "block";
+
+                    // Move the item to ADDED TO XCODE section
+                    const activeItem = heroSidebar.querySelector(".sidebar-item.active");
+                    if (activeItem) {
+                        heroSidebar.insertBefore(activeItem, sidebarFooter);
+                    }
+
+                    updateHeroView(currentTheme);
+                } else {
+                    // Apply to Xcode
+                    heroActionBtn.textContent = "Applied! ✓";
+                    heroActionBtn.style.transform = "scale(0.95)";
+                    setTimeout(() => {
+                        heroActionBtn.style.transform = "scale(1)";
+                        setTimeout(() => {
+                            if (addedThemes.has(currentTheme)) {
+                                updateHeroView(currentTheme);
+                            }
+                        }, 1500);
+                    }, 150);
+                }
+            });
+        }
+    }
 });

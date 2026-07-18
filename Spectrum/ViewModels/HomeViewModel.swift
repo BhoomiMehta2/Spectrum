@@ -14,6 +14,9 @@ public final class HomeViewModel {
     /// The currently selected theme for previewing.
     public var selectedTheme: Theme
     
+    /// Themes that have been explicitly added to Xcode's FontAndColorThemes folder.
+    public var addedToXcodeThemes: [Theme] = []
+    
     /// Determines whether the import sheet is presented.
     public var isImporting: Bool = false
     
@@ -57,6 +60,9 @@ public final class HomeViewModel {
         // Load persisted custom themes
         let persisted = Self.loadPersistedThemes()
         self.importedThemes = persisted
+        
+        let persistedAdded = Self.loadPersistedAddedThemes()
+        self.addedToXcodeThemes = persistedAdded
         
         // Default to the first imported theme if exists, otherwise default to Dracula
         self.selectedTheme = persisted.first ?? loaded.first(where: { $0.name.contains("Dracula") }) ?? .dracula
@@ -151,19 +157,29 @@ public final class HomeViewModel {
         }
     }
     
-    /// Installs the theme into Xcode's FontAndColorThemes folder.
-    public func installTheme() {
+    /// Adds the theme to Xcode and the sidebar list without applying it.
+    public func addTheme() {
         do {
             let xmlContent = XcodeThemeExporter.generateXML(for: selectedTheme)
-            let needsRestart = try ThemeInstaller.install(themeName: selectedTheme.name, xmlContent: xmlContent)
+            try ThemeInstaller.addTheme(themeName: selectedTheme.name, xmlContent: xmlContent)
             
-            if needsRestart {
-                self.showRestartAlert = true
-            } else {
-                triggerSuccess("Theme '\(selectedTheme.name)' installed and set as active successfully!")
+            if !addedToXcodeThemes.contains(where: { $0.name == selectedTheme.name }) {
+                addedToXcodeThemes.append(selectedTheme)
+                saveAddedThemes()
             }
+            triggerSuccess("Theme '\(selectedTheme.name)' added to Xcode!")
         } catch {
-            displayError("Xcode Theme Installation failed: \(error.localizedDescription)")
+            displayError("Failed to add theme to Xcode: \(error.localizedDescription)")
+        }
+    }
+    
+    /// Applies the theme in Xcode preferences.
+    public func applyTheme() {
+        let needsRestart = ThemeInstaller.applyTheme(themeName: selectedTheme.name)
+        if needsRestart {
+            self.showRestartAlert = true
+        } else {
+            triggerSuccess("Theme '\(selectedTheme.name)' set as active in Xcode successfully!")
         }
     }
     
@@ -276,6 +292,18 @@ public final class HomeViewModel {
         }
     }
     
+    private func saveAddedThemes() {
+        guard let dir = Self.getImportedThemesDirectory() else { return }
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(addedToXcodeThemes)
+            let fileURL = dir.appendingPathComponent("added_themes.json")
+            try data.write(to: fileURL, options: .atomic)
+        } catch {
+            print("Failed to save added themes: \(error.localizedDescription)")
+        }
+    }
+    
     private static func loadPersistedThemes() -> [Theme] {
         guard let dir = getImportedThemesDirectory() else { return [] }
         let fileURL = dir.appendingPathComponent("themes.json")
@@ -286,6 +314,20 @@ public final class HomeViewModel {
             return try decoder.decode([Theme].self, from: data)
         } catch {
             print("Failed to load persisted themes: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    private static func loadPersistedAddedThemes() -> [Theme] {
+        guard let dir = getImportedThemesDirectory() else { return [] }
+        let fileURL = dir.appendingPathComponent("added_themes.json")
+        guard FileManager.default.fileExists(atPath: fileURL.path) else { return [] }
+        do {
+            let data = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            return try decoder.decode([Theme].self, from: data)
+        } catch {
+            print("Failed to load persisted added themes: \(error.localizedDescription)")
             return []
         }
     }

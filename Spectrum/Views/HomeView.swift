@@ -64,14 +64,26 @@ public struct HomeView: View {
                         .buttonStyle(.bordered)
                         .controlSize(.large)
                         
-                        Button(action: {
-                            viewModel.installTheme()
-                        }) {
-                            Label("Install to Xcode", systemImage: "hammer.fill")
-                                .fontWeight(.semibold)
+                        if viewModel.addedToXcodeThemes.contains(where: { $0.name == viewModel.selectedTheme.name }) {
+                            Button(action: {
+                                viewModel.applyTheme()
+                            }) {
+                                Label("Apply to Xcode", systemImage: "checkmark.seal.fill")
+                                    .fontWeight(.semibold)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.green)
+                            .controlSize(.large)
+                        } else {
+                            Button(action: {
+                                viewModel.addTheme()
+                            }) {
+                                Label("Add to Xcode", systemImage: "plus.app.fill")
+                                    .fontWeight(.semibold)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.large)
                     }
                 }
                 .padding(.vertical, 20)

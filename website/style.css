@@ -425,6 +425,7 @@ body {
     padding: 5px 12px;
     border-radius: 6px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .editor-pane {

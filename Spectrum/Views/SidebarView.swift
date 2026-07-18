@@ -32,6 +32,18 @@ public struct SidebarView: View {
                 }
                 .collapsible(false)
             }
+            
+            if !viewModel.addedToXcodeThemes.isEmpty {
+                Section(header: Text("Added to Xcode").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)) {
+                    ForEach(viewModel.addedToXcodeThemes) { theme in
+                        ThemeCard(theme: theme, isSelected: viewModel.selectedTheme.name == theme.name)
+                            .onTapGesture {
+                                viewModel.selectTheme(theme)
+                            }
+                    }
+                }
+                .collapsible(false)
+            }
         }
         .listStyle(.sidebar)
         .safeAreaInset(edge: .bottom) {
