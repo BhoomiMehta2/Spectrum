@@ -1,8 +1,13 @@
 #!/bin/bash
 set -e
 
-echo "✨ Installing Spectrum for Xcode..."
-echo "📥 Downloading Spectrum-v1.0.zip..."
+if [ -d "/Applications/Spectrum.app" ]; then
+    echo "✨ Updating Spectrum for Xcode to the latest version..."
+else
+    echo "✨ Installing Spectrum for Xcode..."
+fi
+
+echo "📥 Downloading latest Spectrum-v1.0.zip..."
 
 curl -sL "https://bhoomimehta2.github.io/Spectrum/Spectrum-v1.0.zip" -o "/tmp/Spectrum-v1.0.zip"
 
@@ -11,7 +16,7 @@ rm -rf "/tmp/SpectrumInstall"
 mkdir -p "/tmp/SpectrumInstall"
 unzip -q "/tmp/Spectrum-v1.0.zip" -d "/tmp/SpectrumInstall"
 
-echo "📂 Installing to Applications..."
+echo "📂 Moving to Applications..."
 # Remove if exists
 rm -rf "/Applications/Spectrum.app"
 cp -R "/tmp/SpectrumInstall/Spectrum.app" "/Applications/"
