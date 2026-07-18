@@ -1,0 +1,20 @@
+# macOS System Files
+.DS_Store
+.DS_Store?
+**/.DS_Store
+
+# Xcode & Build directories
+build/
+DerivedData/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+ThemeForge.app/
+
+# Root-level binaries (already inside website/ folder for download)
+/Spectrum-v1.0.zip
+/Spectrum.dmg
