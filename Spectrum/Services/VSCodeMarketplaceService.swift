@@ -69,7 +69,8 @@ public final class VSCodeMarketplaceService {
                 [
                     "criteria": [
                         ["filterType": 8, "value": "Microsoft.VisualStudio.Code"],
-                        ["filterType": 10, "value": query]
+                        ["filterType": 10, "value": query],
+                        ["filterType": 5, "value": "Themes"]
                     ],
                     "pageSize": 15,
                     "pageNumber": 1,

@@ -9,36 +9,46 @@ public struct SidebarView: View {
         self.viewModel = viewModel
     }
     
+    @State private var isBuiltInExpanded: Bool = true
+    @State private var isImportedExpanded: Bool = true
+    @State private var isAddedExpanded: Bool = true
+    
     public var body: some View {
         List {
-            Section(header: Text("Built-in").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)) {
+            Section(isExpanded: $isBuiltInExpanded) {
                 ForEach(viewModel.builtInThemes) { theme in
                     ThemeCard(theme: theme, isSelected: viewModel.selectedTheme.name == theme.name)
                         .onTapGesture {
                             viewModel.selectTheme(theme)
                         }
                 }
+            } header: {
+                Text("Built-in").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)
             }
             
             if !viewModel.importedThemes.isEmpty {
-                Section(header: Text("Imported").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)) {
+                Section(isExpanded: $isImportedExpanded) {
                     ForEach(viewModel.importedThemes) { theme in
                         ThemeCard(theme: theme, isSelected: viewModel.selectedTheme.name == theme.name)
                             .onTapGesture {
                                 viewModel.selectTheme(theme)
                             }
                     }
+                } header: {
+                    Text("Imported").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)
                 }
             }
             
             if !viewModel.addedToXcodeThemes.isEmpty {
-                Section(header: Text("Added to Xcode").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)) {
+                Section(isExpanded: $isAddedExpanded) {
                     ForEach(viewModel.addedToXcodeThemes) { theme in
                         ThemeCard(theme: theme, isSelected: viewModel.selectedTheme.name == theme.name)
                             .onTapGesture {
                                 viewModel.selectTheme(theme)
                             }
                     }
+                } header: {
+                    Text("Added to Xcode").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)
                 }
             }
         }
