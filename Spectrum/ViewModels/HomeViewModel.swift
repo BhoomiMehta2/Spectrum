@@ -250,13 +250,48 @@ public final class HomeViewModel {
                 let themes = try VSCodeMarketplaceService.extractThemes(fromVSIX: vsixURL)
                 
                 // 3. Import each theme
+                var successCount = 0
+                var failedNames: [String] = []
+                
                 for theme in themes {
-                    self.importTheme(fromText: theme.content, defaultName: theme.name)
+                    do {
+                        let cleanedString = VSCodeThemeImporter.cleanJSONComments(theme.content)
+                        guard let cleanedData = cleanedString.data(using: .utf8) else {
+                            throw NSError(domain: "VSCodeThemeImporter", code: 2, userInfo: [NSLocalizedDescriptionKey: "Failed to sanitize comments from JSON string."])
+                        }
+                        
+                        let decoder = JSONDecoder()
+                        let vscodeTheme = try decoder.decode(VSCodeTheme.self, from: cleanedData)
+                        let resolvedName = self.uniqueThemeName(for: vscodeTheme.name ?? theme.name)
+                        
+                        let newTheme = ThemeConverter.convert(vscodeTheme: vscodeTheme, defaultName: resolvedName)
+                        
+                        self.importedThemes.append(newTheme)
+                        self.selectedTheme = newTheme
+                        successCount += 1
+                    } catch {
+                        failedNames.append(theme.name)
+                    }
+                }
+                
+                if successCount > 0 {
+                    self.saveThemes()
                 }
                 
                 self.isImportingFromMarketplace = false
                 self.marketplaceImportStatus = nil
-                self.isImporting = false // Close the sheet upon success
+                
+                if successCount > 0 {
+                    self.isImporting = false // Close the sheet upon success
+                    if failedNames.isEmpty {
+                        self.triggerSuccess("Successfully imported \(successCount) theme(s)!")
+                    } else {
+                        // If some succeeded but others failed, just show a success message but mention the failures
+                        self.triggerSuccess("Imported \(successCount) theme(s). Failed to parse: \(failedNames.joined(separator: ", "))")
+                    }
+                } else {
+                    self.displayError("Failed to parse any themes from this package.")
+                }
             } catch {
                 self.isImportingFromMarketplace = false
                 self.marketplaceImportStatus = nil
