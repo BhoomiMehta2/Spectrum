@@ -63,6 +63,8 @@ public struct SidebarView: View {
         }
     }
     
+    @State private var expandedGroups: Set<String> = []
+    
     @ViewBuilder
     private func renderThemeGroup(themes: [Theme]) -> some View {
         let grouped = Dictionary(grouping: themes, by: { $0.group ?? "" })
@@ -75,7 +77,18 @@ public struct SidebarView: View {
                     renderThemeRow(theme)
                 }
             } else {
-                DisclosureGroup {
+                DisclosureGroup(
+                    isExpanded: Binding(
+                        get: { expandedGroups.contains(key) },
+                        set: { isExpanded in
+                            if isExpanded {
+                                expandedGroups.insert(key)
+                            } else {
+                                expandedGroups.remove(key)
+                            }
+                        }
+                    )
+                ) {
                     ForEach(grouped[key] ?? []) { theme in
                         renderThemeRow(theme)
                     }
