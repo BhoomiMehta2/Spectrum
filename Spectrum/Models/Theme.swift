@@ -6,6 +6,7 @@ public struct Theme: Codable, Identifiable, Equatable, Sendable {
     
     public var name: String
     public var author: String
+    public var group: String?
     
     // Editor UI Colors
     public var background: ThemeColor
@@ -38,6 +39,7 @@ public struct Theme: Codable, Identifiable, Equatable, Sendable {
     public init(
         name: String,
         author: String,
+        group: String? = nil,
         background: ThemeColor,
         foreground: ThemeColor,
         selection: ThemeColor,
@@ -65,6 +67,7 @@ public struct Theme: Codable, Identifiable, Equatable, Sendable {
     ) {
         self.name = name
         self.author = author
+        self.group = group
         self.background = background
         self.foreground = foreground
         self.selection = selection

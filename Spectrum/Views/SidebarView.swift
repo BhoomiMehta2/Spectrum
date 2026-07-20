@@ -28,19 +28,7 @@ public struct SidebarView: View {
             
             if !viewModel.addedToXcodeThemes.isEmpty {
                 Section(isExpanded: $isAddedExpanded) {
-                    ForEach(viewModel.addedToXcodeThemes) { theme in
-                        ThemeCard(theme: theme, isSelected: viewModel.selectedTheme.name == theme.name)
-                            .onTapGesture {
-                                viewModel.selectTheme(theme)
-                            }
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    viewModel.deleteTheme(theme)
-                                } label: {
-                                    Label("Delete Theme", systemImage: "trash")
-                                }
-                            }
-                    }
+                    renderThemeGroup(themes: viewModel.addedToXcodeThemes)
                 } header: {
                     Text("Added to Xcode").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)
                 }
@@ -48,25 +36,15 @@ public struct SidebarView: View {
             
             if !viewModel.importedThemes.isEmpty {
                 Section(isExpanded: $isImportedExpanded) {
-                    ForEach(viewModel.importedThemes) { theme in
-                        ThemeCard(theme: theme, isSelected: viewModel.selectedTheme.name == theme.name)
-                            .onTapGesture {
-                                viewModel.selectTheme(theme)
-                            }
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    viewModel.deleteTheme(theme)
-                                } label: {
-                                    Label("Delete Theme", systemImage: "trash")
-                                }
-                            }
-                    }
+                    renderThemeGroup(themes: viewModel.importedThemes)
                 } header: {
                     Text("Imported").font(.subheadline).fontWeight(.semibold).foregroundColor(.secondary)
                 }
             }
         }
-        .listStyle(.sidebar)
+        .listStyle(SidebarListStyle())
+        .animation(.default, value: viewModel.importedThemes)
+        .animation(.default, value: viewModel.addedToXcodeThemes)
         .safeAreaInset(edge: .bottom) {
             Button(action: {
                 viewModel.isImporting = true
@@ -83,5 +61,45 @@ public struct SidebarView: View {
             .controlSize(.large)
             .padding(16)
         }
+    }
+    
+    @ViewBuilder
+    private func renderThemeGroup(themes: [Theme]) -> some View {
+        let grouped = Dictionary(grouping: themes, by: { $0.group ?? "" })
+        let sortedKeys = grouped.keys.sorted()
+        
+        ForEach(sortedKeys, id: \.self) { key in
+            if key == "" {
+                // Ungrouped themes
+                ForEach(grouped[key] ?? []) { theme in
+                    renderThemeRow(theme)
+                }
+            } else {
+                DisclosureGroup {
+                    ForEach(grouped[key] ?? []) { theme in
+                        renderThemeRow(theme)
+                    }
+                } label: {
+                    Label(key, systemImage: "folder.fill")
+                        .font(.body)
+                        .foregroundColor(.primary)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func renderThemeRow(_ theme: Theme) -> some View {
+        ThemeCard(theme: theme, isSelected: viewModel.selectedTheme.name == theme.name)
+            .onTapGesture {
+                viewModel.selectTheme(theme)
+            }
+            .contextMenu {
+                Button(role: .destructive) {
+                    viewModel.deleteTheme(theme)
+                } label: {
+                    Label("Delete Theme", systemImage: "trash")
+                }
+            }
     }
 }

@@ -313,8 +313,12 @@ public final class HomeViewModel {
                         
                         let newTheme = ThemeConverter.convert(vscodeTheme: vscodeTheme, defaultName: resolvedName)
                         
-                        self.importedThemes.append(newTheme)
-                        self.selectedTheme = newTheme
+                        // Tag with group name based on extension package
+                        var taggedTheme = newTheme
+                        taggedTheme.group = ext.displayName ?? ext.extensionName
+                        
+                        self.importedThemes.append(taggedTheme)
+                        self.selectedTheme = taggedTheme
                         successCount += 1
                     } catch {
                         failedNames.append(theme.name)
