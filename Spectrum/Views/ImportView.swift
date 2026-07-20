@@ -205,7 +205,8 @@ public struct ImportView: View {
                                 ScrollView {
                                     LazyVStack(spacing: 12) {
                                         ForEach(viewModel.marketplaceResults) { ext in
-                                            MarketplaceResultRow(ext: ext) {
+                                            let isInstalled = viewModel.importedThemes.contains(where: { $0.group == (ext.displayName ?? ext.extensionName) })
+                                            MarketplaceResultRow(ext: ext, isInstalled: isInstalled) {
                                                 viewModel.importMarketplaceTheme(ext)
                                             }
                                         }
@@ -355,6 +356,7 @@ public struct ImportView: View {
 /// Row helper for Marketplace search results
 struct MarketplaceResultRow: View {
     let ext: VSMarketplaceExtension
+    let isInstalled: Bool
     let action: () -> Void
     @State private var isHovered = false
     
@@ -384,11 +386,13 @@ struct MarketplaceResultRow: View {
             Spacer(minLength: 12)
             
             Button(action: action) {
-                Text("Get")
+                Text(isInstalled ? "Installed" : "Get")
                     .fontWeight(.bold)
                     .padding(.horizontal, 12)
             }
             .buttonStyle(.borderedProminent)
+            .tint(isInstalled ? .secondary : .accentColor)
+            .disabled(isInstalled)
             .controlSize(.small)
         }
         .padding(12)
