@@ -73,6 +73,16 @@ public struct HomeView: View {
                             .tint(Color(NSColor.systemGray))
                             .controlSize(.large)
                             .disabled(true)
+                            
+                            Button(action: {
+                                viewModel.removeTheme()
+                            }) {
+                                Label("Remove", systemImage: "trash.fill")
+                                    .fontWeight(.semibold)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.red)
+                            .controlSize(.large)
                         } else if viewModel.addedToXcodeThemes.contains(where: { $0.name == viewModel.selectedTheme.name }) {
                             Button(action: {
                                 viewModel.applyTheme()
@@ -82,6 +92,16 @@ public struct HomeView: View {
                             }
                             .buttonStyle(.borderedProminent)
                             .tint(.green)
+                            .controlSize(.large)
+                            
+                            Button(action: {
+                                viewModel.removeTheme()
+                            }) {
+                                Label("Remove", systemImage: "trash.fill")
+                                    .fontWeight(.semibold)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.red)
                             .controlSize(.large)
                         } else {
                             Button(action: {

@@ -45,4 +45,28 @@ public final class ThemeInstaller {
         
         return isXcodeRunning
     }
+    
+    /// Deletes the xccolortheme file from Xcode's FontAndColorThemes folder.
+    public static func removeTheme(themeName: String) throws {
+        let fileManager = FileManager.default
+        
+        guard let libraryURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first else {
+            throw NSError(
+                domain: "ThemeInstaller",
+                code: 1,
+                userInfo: [NSLocalizedDescriptionKey: "Could not locate the User Library directory. Please check disk permissions."]
+            )
+        }
+        
+        let destinationURL = libraryURL
+            .appendingPathComponent("Developer")
+            .appendingPathComponent("Xcode")
+            .appendingPathComponent("UserData")
+            .appendingPathComponent("FontAndColorThemes")
+            .appendingPathComponent("\(themeName).xccolortheme")
+            
+        if fileManager.fileExists(atPath: destinationURL.path) {
+            try fileManager.removeItem(at: destinationURL)
+        }
+    }
 }

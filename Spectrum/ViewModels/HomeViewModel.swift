@@ -178,6 +178,27 @@ public final class HomeViewModel {
         }
     }
     
+    /// Removes the theme from Xcode and updates the sidebar list.
+    public func removeTheme() {
+        do {
+            try ThemeInstaller.removeTheme(themeName: selectedTheme.name)
+            
+            if let index = addedToXcodeThemes.firstIndex(where: { $0.name == selectedTheme.name }) {
+                addedToXcodeThemes.remove(at: index)
+                saveAddedThemes()
+            }
+            
+            if activeThemeName == selectedTheme.name {
+                activeThemeName = nil
+                UserDefaults.standard.removeObject(forKey: "ActiveXcodeTheme")
+            }
+            
+            triggerSuccess("Theme '\(selectedTheme.name)' removed from Xcode!")
+        } catch {
+            displayError("Failed to remove theme from Xcode: \(error.localizedDescription)")
+        }
+    }
+    
     /// Applies the theme in Xcode preferences.
     public func applyTheme() {
         let needsRestart = ThemeInstaller.applyTheme(themeName: selectedTheme.name)
