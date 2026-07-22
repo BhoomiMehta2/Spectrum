@@ -30,17 +30,18 @@ public final class ThemeInstaller {
         try xmlContent.write(to: destinationURL, atomically: true, encoding: .utf8)
     }
     
-    /// Sets the theme as active in Xcode preferences and returns true if Xcode is currently running.
     public static func applyTheme(themeName: String) -> Bool {
-        let domain = "com.apple.dt.Xcode" as CFString
+        let domains = ["com.apple.dt.Xcode" as CFString, "com.apple.dt.Xcode-beta" as CFString]
         let themeFile = "\(themeName).xccolortheme" as CFString
         
-        CFPreferencesSetAppValue("XCFontAndColorCurrentTheme" as CFString, themeFile, domain)
-        CFPreferencesSetAppValue("XCFontAndColorCurrentDarkTheme" as CFString, themeFile, domain)
-        CFPreferencesAppSynchronize(domain)
+        for domain in domains {
+            CFPreferencesSetAppValue("XCFontAndColorCurrentTheme" as CFString, themeFile, domain)
+            CFPreferencesSetAppValue("XCFontAndColorCurrentDarkTheme" as CFString, themeFile, domain)
+            CFPreferencesAppSynchronize(domain)
+        }
         
         let isXcodeRunning = NSWorkspace.shared.runningApplications.contains { app in
-            app.bundleIdentifier == "com.apple.dt.Xcode"
+            app.bundleIdentifier == "com.apple.dt.Xcode" || app.bundleIdentifier == "com.apple.dt.Xcode-beta"
         }
         
         return isXcodeRunning
